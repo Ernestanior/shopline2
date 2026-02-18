@@ -3,29 +3,7 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-
-const productCategories = [
-  {
-    name: '束腰馬甲',
-    items: ['前扣版', '背扣版', '魚骨款'],
-    image: '/images/products/product-1.jpg'
-  },
-  {
-    name: '連體背心',
-    items: ['蕾絲款', '網紗款', '雕花款'],
-    image: '/images/products/product-15.jpg'
-  },
-  {
-    name: '背心上衣',
-    items: ['排釦款', '法式款', '高冷款'],
-    image: '/images/products/product-18.jpg'
-  },
-  {
-    name: '套裝組合',
-    items: ['西裝套裝', '短褲套裝', '裙裝套裝'],
-    image: '/images/products/product-5.jpg'
-  }
-]
+import { HEADER_CATEGORIES } from '@/lib/categories'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -87,7 +65,7 @@ export default function Header() {
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-screen max-w-4xl animate-fadeIn">
                   <div className="bg-[#0a0a0a] border border-white/10 rounded-lg p-8 shadow-2xl">
                     <div className="grid grid-cols-4 gap-6">
-                      {productCategories.map((category) => (
+                      {HEADER_CATEGORIES.map((category) => (
                         <Link
                           key={category.name}
                           href={`/products?category=${encodeURIComponent(category.name)}`}
