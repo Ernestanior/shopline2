@@ -3,7 +3,8 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 const allProducts = [
   { id: 1, name: '【2色·前扣版】沙漏曲線蕾絲魚骨束腰馬甲背心', price: 590, image: '/images/products/product-1.jpg', badge: '2件9折、3件85折♥︎', category: '束腰馬甲' },
@@ -28,9 +29,19 @@ const allProducts = [
   { id: 20, name: 'Jennie ➷【可拆卸胸墊·頂級蕾絲半月魚骨馬甲背心bratop】/【附雕刻腰帶·酷辣Y2K骷髏卯釘豐胯低腰短褲】', price: 590, image: '/images/products/product-20.jpg', badge: '2件9折、3件85折♥︎', category: '套裝' },
 ]
 
-export default function ProductsPage() {
+function ProductsContent() {
+  const searchParams = useSearchParams()
+  const categoryFromUrl = searchParams.get('category')
+  
   const [selectedCategory, setSelectedCategory] = useState('全部')
   const [sortBy, setSortBy] = useState('default')
+
+  // 当 URL 参数变化时更新选中的分类
+  useEffect(() => {
+    if (categoryFromUrl) {
+      setSelectedCategory(categoryFromUrl)
+    }
+  }, [categoryFromUrl])
 
   const categories = ['全部', '束腰馬甲', '連體背心', '背心', '套裝']
 
@@ -50,9 +61,7 @@ export default function ProductsPage() {
   }, [selectedCategory, sortBy])
 
   return (
-    <main className="min-h-screen bg-black gradient-mesh">
-      <Header />
-
+    <>
       <div className="bg-white text-black text-center py-2 text-xs md:text-sm font-medium">
         2件9折、3件85折♥︎
       </div>
@@ -106,7 +115,21 @@ export default function ProductsPage() {
           </div>
         </div>
       </section>
+    </>
+  )
+}
 
+export default function ProductsPage() {
+  return (
+    <main className="min-h-screen bg-black gradient-mesh">
+      <Header />
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-white">載入中...</div>
+        </div>
+      }>
+        <ProductsContent />
+      </Suspense>
       <Footer />
     </main>
   )
