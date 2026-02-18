@@ -13,8 +13,10 @@ import ScrollProgress from '@/components/ScrollProgress'
 import StickyAddToCart from '@/components/StickyAddToCart'
 import { useState, useEffect } from 'react'
 import { useCart } from '@/hooks/useCart'
+import { use } from 'react'
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const { addItem } = useCart()
   const [selectedSize, setSelectedSize] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
@@ -24,7 +26,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const [viewCount, setViewCount] = useState(0)
 
   const product = {
-    id: parseInt(params.id),
+    id: parseInt(id),
     name: '【2色·前扣版】沙漏曲線蕾絲魚骨束腰馬甲背心',
     price: 590,
     originalPrice: 890,
@@ -33,12 +35,12 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     badge: '2件9折、3件85折♥︎',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['黑色', '白色'],
-    image: `/images/products/product-${params.id}.jpg`,
+    image: `/images/products/product-${id}.jpg`,
     images: [
-      `/images/products/product-${params.id}.jpg`,
-      `/images/products/product-${(parseInt(params.id) % 20) + 1}.jpg`,
-      `/images/products/product-${((parseInt(params.id) + 1) % 20) + 1}.jpg`,
-      `/images/products/product-${((parseInt(params.id) + 2) % 20) + 1}.jpg`
+      `/images/products/product-${id}.jpg`,
+      `/images/products/product-${(parseInt(id) % 20) + 1}.jpg`,
+      `/images/products/product-${((parseInt(id) + 1) % 20) + 1}.jpg`,
+      `/images/products/product-${((parseInt(id) + 2) % 20) + 1}.jpg`
     ],
     details: [
       '材質：頂級蕾絲 + 高彈性布料',

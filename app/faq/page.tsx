@@ -2,6 +2,7 @@
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Link from 'next/link'
 import { useState } from 'react'
 
 const faqs = [
@@ -103,12 +104,12 @@ export default function FAQPage() {
             <p className="text-sm text-white/60 mb-4">
               如果以上答案無法解決您的問題，歡迎聯繫我們的客服團隊
             </p>
-            <a
+            <Link
               href="/contact"
               className="inline-block bg-white text-black px-6 py-2.5 text-sm font-medium hover:bg-gray-100 transition-all hover:scale-105 rounded"
             >
               聯繫客服
-            </a>
+            </Link>
           </div>
         </div>
       </section>

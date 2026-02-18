@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Link from 'next/link'
 import Image from 'next/image'
 
 export default function AboutPage() {
@@ -107,12 +108,12 @@ export default function AboutPage() {
           <p className="text-white/60 text-sm mb-8">
             有任何問題或建議，歡迎隨時與我們聯繫
           </p>
-          <a
+          <Link
             href="/contact"
             className="inline-block bg-white text-black px-8 py-3 text-sm hover:bg-gray-100 transition-colors"
           >
             前往聯絡頁面
-          </a>
+          </Link>
         </div>
       </section>
 

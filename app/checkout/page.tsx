@@ -2,6 +2,7 @@
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/hooks/useCart'
@@ -53,12 +54,12 @@ export default function CheckoutPage() {
             </svg>
             <h2 className="text-xl text-white mb-4">購物車是空的</h2>
             <p className="text-white/60 mb-6">請先添加商品到購物車</p>
-            <a
+            <Link
               href="/products"
               className="inline-block bg-white text-black px-8 py-3 text-sm font-medium hover:bg-gray-100 transition-all hover:scale-105 rounded"
             >
               前往購物
-            </a>
+            </Link>
           </div>
         </section>
         <Footer />

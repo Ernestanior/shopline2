@@ -20,7 +20,7 @@ export function useAuth() {
 
   const checkAuth = async () => {
     try {
-      const data = await api.me()
+      const data = await api.me() as { user: User }
       setUser(data.user)
     } catch (error) {
       // API不可用时，检查localStorage中的用户信息
@@ -41,7 +41,7 @@ export function useAuth() {
 
   const login = async (email: string, password: string) => {
     try {
-      const data = await api.login(email, password)
+      const data = await api.login(email, password) as { user: User }
       setUser(data.user)
       localStorage.setItem('user', JSON.stringify(data.user))
       return data
@@ -56,7 +56,7 @@ export function useAuth() {
 
   const register = async (email: string, password: string, name?: string) => {
     try {
-      const data = await api.register(email, password, name)
+      const data = await api.register(email, password, name) as { user: User }
       setUser(data.user)
       localStorage.setItem('user', JSON.stringify(data.user))
       return data

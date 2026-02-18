@@ -4,9 +4,9 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 
-export default function OrdersPage() {
+function OrdersContent() {
   const searchParams = useSearchParams()
   const [showSuccess, setShowSuccess] = useState(false)
   
@@ -119,5 +119,22 @@ export default function OrdersPage() {
 
       <Footer />
     </main>
+  )
+}
+
+
+export default function OrdersPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-black gradient-mesh">
+        <Header />
+        <section className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-16">
+          <div className="text-center text-white">載入中...</div>
+        </section>
+        <Footer />
+      </main>
+    }>
+      <OrdersContent />
+    </Suspense>
   )
 }

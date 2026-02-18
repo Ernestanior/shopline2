@@ -11,7 +11,7 @@ export async function fetchAPI(endpoint: string, options: RequestInit = {}) {
       },
     })
 
-    const data = await res.json()
+    const data = await res.json() as { error?: string; [key: string]: any }
 
     if (!res.ok) {
       throw new Error(data.error || 'API request failed')

@@ -3,10 +3,13 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
+import Image from 'next/image'
+import { use } from 'react'
 
-export default function OrderDetailPage({ params }: { params: { id: string } }) {
+export default function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const order = {
-    id: parseInt(params.id),
+    id: parseInt(id),
     orderNumber: 'ORD1234567890',
     status: 'pending',
     createdAt: '2024-02-16',
@@ -84,8 +87,8 @@ export default function OrderDetailPage({ params }: { params: { id: string } }) 
             <div className="space-y-4">
               {order.items.map((item) => (
                 <div key={item.id} className="flex gap-4 p-4 bg-white/5 rounded-lg">
-                  <div className="w-20 h-28 bg-white/10 rounded overflow-hidden flex-shrink-0">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                  <div className="relative w-20 h-28 bg-white/10 rounded overflow-hidden flex-shrink-0">
+                    <Image src={item.image} alt={item.name} fill className="object-cover" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-sm text-white mb-2">{item.name}</h3>

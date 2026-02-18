@@ -2,6 +2,7 @@
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Link from 'next/link'
 import { useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 
@@ -100,12 +101,12 @@ export default function ProfilePage() {
                 <div className="glass-effect rounded-lg p-6 md:p-8">
                   <h2 className="text-lg text-white font-medium mb-6">訂單記錄</h2>
                   <p className="text-sm text-white/60">尚無訂單記錄</p>
-                  <a
+                  <Link
                     href="/products"
                     className="inline-block mt-4 bg-white text-black px-6 py-2.5 text-sm font-medium hover:bg-gray-100 transition-all hover:scale-105 rounded"
                   >
                     開始購物
-                  </a>
+                  </Link>
                 </div>
               )}
 
